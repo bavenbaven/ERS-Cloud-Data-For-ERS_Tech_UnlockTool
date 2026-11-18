@@ -1,0 +1,34 @@
+{
+  "format": "ERSK1",
+  "cipher": "AES-256-CBC",
+  "kdf": "PBKDF2-HMAC-SHA256",
+  "kdfIterations": 300000,
+  "mac": "HMAC-SHA256 (encrypt-then-MAC)",
+  "createdAt": "2026-11-18T15:25:30+08:00",
+  "note": "Both blobs use the SAME passphrase.",
+  "passphraseStorage": "D:\\ERS_MDM_KEY_BACKUP\\PASSPHRASE.txt + your password manager. Never store it next to the blobs.",
+  "blobs": [
+    {
+      "file": "ers_mdm.jks.ersk",
+      "purpose": "APK signing keystore (com.erstech.mdmlock) - REQUIRED to publish APK updates",
+      "blobBytes": 2810,
+      "blobSha256": "825ad465746a447127775f84e41e2a752bacd6b655a411b009527f67c01b7ee2",
+      "source": "mdm_app/keystore/ers_mdm.jks",
+      "sourceSha256": "6f063d46a738fc0dfcec803c7e6bb602456c49c032e0203fcc21188dd7a7f08c",
+      "alias": "ersmdm",
+      "certSha256": "5ba78c840108efbd2ea39057ca008d9e22e0fb398d030c87e5716d2b97bd1783",
+      "restoreCmd": "powershell -ExecutionPolicy Bypass -File mdm_app\\tools\\keystore_backup.ps1 -Action Restore -In mdm_app\\backup\\ers_mdm.jks.ersk -Out mdm_app\\keystore\\ers_mdm.jks -Passphrase <pass> -Force"
+    },
+    {
+      "file": "ers_license_private.pem.ersk",
+      "purpose": "Licence signing PRIVATE key - REQUIRED to mint offline tokens / sign licences",
+      "blobBytes": 1786,
+      "blobSha256": "d855c23b2f9f6b9a6be040853d63c07af93dd0746eca6b45b6153924ec236740",
+      "source": "server/keys/private.pem",
+      "sourceSha256": "eff911b5def68aab1e6adec6a5cc409a1ae6a53fd9c4b00fac1720b04f52bfb5",
+      "publicKeySha256": "76482374f4c5b745cfe5c8582e69a60d0b3c26d720598f7c7e4ef5210894b9c5",
+      "restoreCmd": "powershell -ExecutionPolicy Bypass -File mdm_app\\tools\\keystore_backup.ps1 -Action Restore -In mdm_app\\backup\\ers_license_private.pem.ersk -Out server\\keys\\private.pem -Passphrase <pass> -Force"
+    }
+  ],
+  "verified": "round-trip restore of both blobs produced byte-identical files (sha256 matched)"
+}
